@@ -10,7 +10,6 @@ import vi from 'images/svg/flags/vi.svg'
 import th from 'images/svg/flags/th.svg'
 import zh from 'images/svg/flags/zh.svg'
 import tr from 'images/svg/flags/tr.svg'
-import ac from 'images/svg/flags/uk.svg'
 import bn from 'images/svg/flags/bn.svg'
 
 const flags = {
@@ -26,7 +25,7 @@ const flags = {
     th,
     zh,
     tr,
-    ac,
+    ac: en,
     bn,
 }
 

@@ -28,6 +28,7 @@ import { DerivStore, useDerivWS } from 'store'
 import { Container } from 'components/containers'
 import { loss_percent } from 'common/constants'
 import { usePageLoaded } from 'components/hooks/use-page-loaded'
+import EditorContextWrapper from 'components/editor/translation-context'
 
 type CFDWarningProps = {
     is_ppc: boolean
@@ -299,44 +300,46 @@ const Layout = ({
         )
     }
     return (
-        <LocationProvider
-            has_mounted={is_mounted}
-            show_cookie_banner={show_cookie_banner}
-            toggleModal={toggleModal}
-            setModalPayload={setModalPayload}
-        >
-            {Navigation}
-            <Main margin_top={margin_top} is_static={is_static}>
-                {children}
-            </Main>
-            {show_cookie_banner && (
-                <CookieBanner
-                    onAccept={onAccept}
-                    onDecline={onDecline}
-                    is_open={show_cookie_banner}
-                />
-            )}
+        <EditorContextWrapper>
+            <LocationProvider
+                has_mounted={is_mounted}
+                show_cookie_banner={show_cookie_banner}
+                toggleModal={toggleModal}
+                setModalPayload={setModalPayload}
+            >
+                {Navigation}
+                <Main margin_top={margin_top} is_static={is_static}>
+                    {children}
+                </Main>
+                {show_cookie_banner && (
+                    <CookieBanner
+                        onAccept={onAccept}
+                        onDecline={onDecline}
+                        is_open={show_cookie_banner}
+                    />
+                )}
 
-            {!no_live_chat && <LiveChat is_banner_shown={show_cookie_banner} />}
-            {FooterNav}
-            <EURedirect
-                toggle={toggleModal}
-                is_open={show_modal}
-                closeModal={closeModal}
-                to={modal_payload.to}
-                target={modal_payload.target}
-                rel={modal_payload.rel}
-                ref={modal_payload.ref}
-                aria_label={modal_payload.aria_label}
-            />
-            <UKAccountClosureModal />
-            {show_non_eu_popup && (
-                <NonEuRedirectPopUp
-                    is_open={show_non_eu_popup}
-                    setShowNonEuPopup={setShowNonEuPopup}
+                {!no_live_chat && <LiveChat is_banner_shown={show_cookie_banner} />}
+                {FooterNav}
+                <EURedirect
+                    toggle={toggleModal}
+                    is_open={show_modal}
+                    closeModal={closeModal}
+                    to={modal_payload.to}
+                    target={modal_payload.target}
+                    rel={modal_payload.rel}
+                    ref={modal_payload.ref}
+                    aria_label={modal_payload.aria_label}
                 />
-            )}
-        </LocationProvider>
+                <UKAccountClosureModal />
+                {show_non_eu_popup && (
+                    <NonEuRedirectPopUp
+                        is_open={show_non_eu_popup}
+                        setShowNonEuPopup={setShowNonEuPopup}
+                    />
+                )}
+            </LocationProvider>
+        </EditorContextWrapper>
     )
 }
 

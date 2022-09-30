@@ -1,7 +1,7 @@
 import React from 'react'
 import { Trans } from 'react-i18next'
 
-type LocalizeProps = {
+export type LocalizeProps = {
     translate_text: string
     values?: { email?: string }
     components?: React.ReactElement[]
